@@ -1,0 +1,4 @@
+Install Virtual Environment : 
+1) py -3 -m venv venv
+2) Select Interpreter . View > Command Palette > Select Interpreter
+3) Set Command Line to Virtual Env. venv\Scripts\activate.bat
