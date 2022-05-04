@@ -1,4 +1,40 @@
 Install Virtual Environment : 
-1) py -3 -m venv venv
-2) Select Interpreter . View > Command Palette > Select Interpreter
-3) Set Command Line to Virtual Env. venv\Scripts\activate.bat
+    1) py -3 -m venv venv
+    2) Select Interpreter . View > Command Palette > Select Interpreter
+    3) Set Command Line to Virtual Env. venv\Scripts\activate.bat
+
+Install Flask: 
+    1) Open REPL. import Flask. If no error, imported succesfully. The package gets installed in venv\Lib
+
+Basic Flask Application
+    1) Import Flask from flask package. 
+    2) Create a instance of Flask App like app = Flask(__name__). Here __name__ means our directory. It tells flask where to look for static files and templates files.
+    3)Create a decorator like app.route("/). It is a decorator which handles all the logic of rendering our files to appropriate URL.
+    4)Create a function and render some text. Our flask app is ready to be served.
+
+Serving Flask App:
+    Flask Way
+        Before we run the file, we have to set an environment variable to the file we want to be our flask application.
+        1) run the command: set FLASK_APP=<filename>.py
+        2) now, run the command: flask run.
+        3) The application should start without any errors. The application is hosted on localmachine on port 5000. It is a running webserver. It comes with flask. It should be running if we want to visit our site.
+        4) The application runs in Production Mode by default. To switch it to developement/debug mode, set another environment varible.
+        5) set FLASK_DEBUG=1. Now, the application runs in debug mode.
+    Python Way
+       1) If we don't want to set up environment variables, we can directly run the file from terminal using Python <filename.py> command.
+       2) But before that, we have to write a line of code in our flask application: app.run(debug=True)
+       3) The line should be at thebottom of the file.
+       4) Its better to wrap this file in a condition: 
+                if __main__ == "__main__:
+                    app.run(debug=True).
+       5) The condition ensures that we only run this file when we run the script directly on the terminal. if some other modules, import this file, the condition will be false and flask application won't start.
+       6)debug=True is a optional parameter. This is for changing the environment to development.
+
+Errors:
+    404 Error:
+        If we try to navigate to a URL which our application doesn't understand, flask is going to response with 404 Error.
+
+    Function Name:
+        We can't have two functions with same name although they might be in seperate routes. 
+
+
