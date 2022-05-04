@@ -33,8 +33,37 @@ Serving Flask App:
 Errors:
     404 Error:
         If we try to navigate to a URL which our application doesn't understand, flask is going to response with 404 Error.
-
     Function Name:
         We can't have two functions with same name although they might be in seperate routes. 
 
+Note:
+    1) If we want a function to handle multiple decorators, we can just put two decorators next to each other(seperate lines).
 
+Serving up Static HTML Pages
+    1)In the function below the decorator routes(app.route("/)), we can use a method called render_template(imported from flask) to render any HTML page. 
+    2)We need to create a template directory at the same level of our main file. 
+    3)Inside the template directory, lets assume we make "about.html" file. In the render_template method, we have to pass the name of our html file as a string.("about.html") 
+    4)Note that we don't have to import any html files in out=r main file. Flask automatically searches for the html file inside the templates folder. 
+    5)If flask doesn't find templates folder, it will throw an error. Similarly, if we donot mention the correct file name, flask gives error. 
+
+Serving up Dynamic HTML Pages
+    1)If we wanted to pass any data to HTML page from our main file, we can do that very easily. in create_template method, as a second argument we can pass any data. 
+    2) Example: return create_template("file1.html", animal = ["cat", "pet"])
+    3) Now, inside file1.html we can access the variable animal and its value. 
+    4) Flask uses a templating engine called Jinja. It allows us to write code inside HTML files. 
+    
+    Jinja Syntax 
+        1) To access any variable passed in render_template method, we open two curly brackets. Eg: {{}}
+        2) Inside the curly brackets, we can refer to the variable. When we run the application, we will have the value of that variable.
+        3) If we want to use any loops, conditions etc (basically python syntax), we have to use {% for i in animal %} and {% endfor %}.
+        4) Between these two code blocks, we can have either any HTML content or we can access any extra variables passed in create_template. 
+    
+    Using a layout.html page:
+        1) We use a layout.html page (file name can be anything) where we write the code that is going to be repeated in 2 or more files. 
+        2) We identify the portion where we want to render specific content from each file and create a Code Block. 
+        3) This file can also be called (Parent File)
+        4)Then from another file(child file), we reference to the parent file's specific Code block and insert file specific content.
+
+    Use Bootstrap/Custom CSS:
+        1) We need to create a folder called static which will contain all our static files such as CSS, JavaScript. 
+        2) We can include cdn link of bootstrap into our layout file. We can also create our custom CSS and include in in layout file.  
