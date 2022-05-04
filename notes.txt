@@ -67,3 +67,27 @@ Serving up Dynamic HTML Pages
     Use Bootstrap/Custom CSS:
         1) We need to create a folder called static which will contain all our static files such as CSS, JavaScript. 
         2) We can include cdn link of bootstrap into our layout file. We can also create our custom CSS and include in in layout file.  
+
+Create Form and validate Input.
+    SignUp Form
+        1) If we implemented our own custom registration Form, it could get really complicated to perform validation, check paswords , do some regex operation etc. 
+        2) The most popular library to create Forms is called WTForms.    
+        3) To install WtForms, use command: pip install flask-wtf. It also install another package called wtforms.
+        4) To create a Form, we have to create a class that extends FlaskForm(imported from flask_wtf).
+        5)We have to define attributes to the class which whill be the fields for the form.
+        6)each field will have a certain characteristics i.e. it could be a string field, a password field etc. 
+        7)We import different Fields from wtforms.
+        8)As the first parameter of the field, we pass the label. 
+        9)Then we pass all the validators that we want in the field.
+        We import validators from wtforms.valiators.
+    
+    Login form
+     1) All the steps are same. We only add a new Boolean Field to logIn the user for some additional time using browser's cookies.
+     2)We also change some fields to suit with Login Form.
+    
+    Note
+       1) We have to add a secret key. A secret key will protect from modifying cookies, cross site request, forgery attacks. To add a Secret Key, we go back to main file. 
+        2) We add a secret key as app.config["SECRET_KEY"] = <secret_key>.
+        3)We can get a secret key using a builtin method called secrets. In that module we use token_hex method and pass it the total bytes for secret key.
+
+
