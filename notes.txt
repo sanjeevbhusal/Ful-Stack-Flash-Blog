@@ -89,5 +89,9 @@ Create Form and validate Input.
        1) We have to add a secret key. A secret key will protect from modifying cookies, cross site request, forgery attacks. To add a Secret Key, we go back to main file. 
         2) We add a secret key as app.config["SECRET_KEY"] = <secret_key>.
         3)We can get a secret key using a builtin method called secrets. In that module we use token_hex method and pass it the total bytes for secret key.
+        4) We will likely want to make this environment variable. We will do this later.
 
-
+    Creating Register Page:
+       1) We create a form in the register page. The method of the form will be "POST" and action will be "" which means that whenever we sybmit the post, request is going to go back to the same route that we are currently on. 
+       2)We use hidden tag method from the form instance that we passed to register.html. It adds CSRF token / Cross Site Request Forgery token. It is used to make our application more secure. 
+       3) Now we create a form using all the fields that we got from the instance. We also a method called url_for which points to a certain url we pass in. 
