@@ -94,4 +94,4 @@ Create Form and validate Input.
     Creating Register Page:
        1) We create a form in the register page. The method of the form will be "POST" and action will be "" which means that whenever we sybmit the post, request is going to go back to the same route that we are currently on. 
        2)We use hidden tag method from the form instance that we passed to register.html. It adds CSRF token / Cross Site Request Forgery token. It is used to make our application more secure. 
-       3) Now we create a form using all the fields that we got from the instance. We also a method called url_for which points to a certain url we pass in. 
+       3) Now we create a form using all the fields that we got from the instance. We also a method called url_for which points to a certain url 
