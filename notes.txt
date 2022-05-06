@@ -95,3 +95,29 @@ Create Form and validate Input.
        1) We create a form in the register page. The method of the form will be "POST" and action will be "" which means that whenever we sybmit the post, request is going to go back to the same route that we are currently on. 
        2)We use hidden tag method from the form instance that we passed to register.html. It adds CSRF token / Cross Site Request Forgery token. It is used to make our application more secure. 
        3) Now we create a form using all the fields that we got from the instance. We also a method called url_for which points to a certain url 
+
+    SQL Alchemy(ORM Object Relational Mapper)
+        1) It allows us to access our database in easy to use object oriented way.
+        2) We can use different databases without changing our Python Code.
+        3) We can install sqlalchemy or flask-sqlalchemy. The second one provides some useful defaults for flask application.
+        4)Import SQLALCHEMy from flask-sqlalchemy.
+        5) Include a config : app.config["SQLALCHEMY_DATABASE_URL]. = "<location of database>"
+        6) For development we will be using sqlite databse as it is very easy to setup.
+        7)SO, the URI will be "sqlite:///site.db". Here, "///" means the relative path for current project directory.
+        8) Now, we have to create a database instance by passing our flask app.: db = SQLALCHEMY(app).
+        9) The great thing about SQLALCHEMY is that we can represent our database structure as Classes(Models).
+        10) Whenever we create a class to model a database structure, we extend the class with "db.Model". Here, db is the database instance.
+        11) Now define all the columns for the table.(Eg: For User Class, columns might be id, yusername, email, password etc.)
+        12) To add a user Instatntiate the class by passing all the fields as **kwargs.
+        13)Now perform a command: db.session.add(<user instance>)
+        14)Now commit the changes using the command db.session.commit()
+
+    SQL Alchemy Commands:
+        1) To get all users from Users table.: User,query.all()
+        2) To get a single user: User.query.first()
+        3)To filter by username: User.query.filter_by(username = "Sanjeev").all()
+        This returns the list of all the users. Even there was only 1 user we will get that user in a list.
+        To get only the first user user .first() instead of .all(). This will return a user without a list.
+        4)The result we get back is a user object. We can use . notation to access multiple fields. Eg: user1.id, user1.username etc.
+        5)To get the user with a ID 1: user.query.get(1)
+        6)To delete all the tables: db.drop_all()

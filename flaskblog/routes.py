@@ -1,12 +1,10 @@
 from flask import Flask, render_template, flash, redirect, url_for
-from forms import RegistrationForm, LoginForm
-app = Flask(__name__)
+from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog import app
 
-
-app.config["SECRET_KEY"] = '2bfaddd9ea201c72b8d450029046cc6d'
 posts = [
     {
-        "author": "Snajeev",
+        "author": "Sanjeev",
         "title": "How to be Better Developer",
         "content": "Learn EveryDay",
         "date_posted": "2022/05/05",
@@ -41,11 +39,8 @@ def login():
         if form.email.data == "admin@gmail.com" and form.password.data == "admin":
             flash("You are succesfullt logged In.", "success")
             return redirect(url_for("home"))
-   
-        else:
-             flash("Please Enter correct Username or password.", "danger")
-            
-    return render_template("login.html", title="Login",  form=form)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+        else:
+            flash("Please Enter correct Username or password.", "danger")
+
+    return render_template("login.html", title="Login",  form=form)
