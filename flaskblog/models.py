@@ -1,15 +1,20 @@
-from flaskblog import db
+from flaskblog import db, login_manager
 from datetime import datetime
+from flask_login import UserMixin
 
+#manage our sessions.
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+    
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False,
-                           default="default.png")
+                           default="default.jpg")
     password = db.Column(db.String(60), nullable=False)
-    #This is actually not a column. It is running an additional query on the Post table that grabs any post from that user.
     posts = db.relationship("Post", backref="author", lazy=True)
 
     def __repr__(self):

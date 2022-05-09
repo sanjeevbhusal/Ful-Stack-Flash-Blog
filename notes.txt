@@ -121,3 +121,32 @@ Create Form and validate Input.
         4)The result we get back is a user object. We can use . notation to access multiple fields. Eg: user1.id, user1.username etc.
         5)To get the user with a ID 1: user.query.get(1)
         6)To delete all the tables: db.drop_all()
+
+    Major File Structure Change
+        1) We changed the file structure to include a package called flaskblog. 
+        2) We have __init__.py file which we use to initialize all other files. 
+        3) Now, we just have a root level file called run.py which we use to import app instance from the package and run it. 
+
+    Add User and User Authentication
+        Password Hashing:
+            1) First, we install a password hashing library called bcrypt to hash all our user's password in database. 
+            2) Then we hash the password using method generate_password_hash(<password>)
+            3) We can check if the hashed password and normal string is true using method check_password_hash(<hashed_password>, <password>).
+            4)If we hash the same string using generate_password_hash(<password>), we will get a different passwordhash every time. 
+            5) So, if our hashed password gets leaked, noone can map it to any hashed table to identify the real password string.
+            6) We can only compare hashed password and real string password to see if both are true.  
+            7) The password we hash is in bytes format. If we want to convert it in String we append the method .decode("utf-8") in generate_password_hash(<password></password>)
+        Prevent User from registering with existing email
+            1) We have set up our database to handle users from signing up with same emails by setting our email field as a unique constraint.
+            2) However, we need to have a way to display a proper message to a user about the error.   
+            3) To do this, we create two functions in the User Model where we query the database to find out if the usernmae or email already exist. The
+            4) if exist, we raise validation error and send the message to the UI.
+        Handling User Logins:
+            1) We import another method called as Login Manager from a new package flask-login.  
+            2) Now we Instantiate the loginManager by passing app instance.
+            3)It makes easier to handle user login sessions by remembering logged In user.
+    
+    Redirect or Render Template:
+        1)When you reload a browser and see a message like Are you sure you are going to reload ? Datawill be lost.
+        2) That is because the browser is telling you that you are going to run a Post request.
+        3) Redirecting causes a browser to send a Get request. That doesnot cause the PopUp.
