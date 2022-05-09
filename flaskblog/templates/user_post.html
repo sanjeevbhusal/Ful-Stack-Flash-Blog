@@ -1,12 +1,13 @@
 {% extends "layout.html" %} {% block title %} {{ title }} {% endblock title %}
-{% block content %} {% for post in posts.items %}
+{% block content %}
+<h1>Posts For {{ user.username }} ({{ posts.total }})</h1>
+{% for post in posts.items %}
 <article class="media content-section">
     <img class="rounded-circle article-img" src={{ url_for("static", filename="profile_pic/" + post.author.image_file )
         }}>
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username ) }}"
-                style="font-size: 20px">{{ post.author.username }}</a>
+            <h5 class="mr-2" style="font-size: 20px">{{ post.author.username }}</h5>
             <h6 class="text-muted" style="display: inline-block">{{ post.date_posted.strftime('%Y-%m-%d') }}</h6>
         </div>
         <h2><a class="article-title" href="{{ url_for('post', post_id = post.id ) }}">{{ post.title }}</a></h2>
@@ -17,9 +18,11 @@
 {% for page in posts.iter_pages(left_edge = 1, right_edge = 1, left_current = 1, right_current = 2) %}
 {% if page %}
 {% if posts.page == page %}
-<a class="btn btn-info  mb-4" href=" {{ url_for('home', page= page) }} ">{{ page }}</a>
+<a class="btn btn-info  mb-4" href=" {{ url_for('user_posts', username = user.username, page= page) }} ">{{ page
+    }}</a>
 {% else %}
-<a class="btn btn-outline-info mb-4" href=" {{ url_for('home', page= page) }} ">{{ page }}</a>
+<a class="btn btn-outline-info  mb-4" href=" {{ url_for('user_posts', username = user.username, page= page) }} ">{{ page
+    }}</a>
 {% endif %}
 {% else %}
 ...

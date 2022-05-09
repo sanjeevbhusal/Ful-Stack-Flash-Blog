@@ -5,7 +5,8 @@
         }}>
     <div class="media-body">
         <div class="article-metadata">
-            <h5 class="mr-2" style="display: inline-block">{{ post.author.username }}</h5>
+            <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username ) }}"
+                style="font-size: 20px">{{ post.author.username }}</a>
             <h6 class="text-muted" style="display: inline-block">{{ post.date_posted.strftime('%Y-%m-%d') }}</h6>
             {% if post.author.username == current_user.username %}
             <div>

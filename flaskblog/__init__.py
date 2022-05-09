@@ -15,6 +15,6 @@ login_manager.login_message_category = "info"
 from flaskblog.models import User, Post
 from flaskblog import routes  
 
-# db.create_all()
+db.create_all()
 
 

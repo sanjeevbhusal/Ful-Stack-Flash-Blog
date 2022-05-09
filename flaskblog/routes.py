@@ -10,8 +10,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 def home():
     page = request.args.get("page", 1 , type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page = page, per_page = 5)
-    for page_num in posts.iter_pages():
-        print(page_num)
     return render_template("app.html", title="Home Page", posts=posts)
 
 
@@ -87,6 +85,7 @@ def account():
     elif form.validate_on_submit():
         if form.picture.data:
             file_name = save_picture(form.picture.data)
+            current_user.image_file = "75ab633bfd027298.jpg"
             old_pic = current_user.image_file
             if old_pic != "default.jpg":
                 os.remove(os.path.join(app.root_path, 'static/profile_pic', old_pic))
@@ -153,3 +152,11 @@ def delete_post(post_id):
     flash("Your post was deleted Succesfully", "success")
     return redirect(url_for("home"))
     
+@app.route("/user/<string:username>")
+def user_posts(username):
+    page = request.args.get("page", 1, type=int)
+    user = User.query.filter_by(username = username).first_or_404()
+    posts = Post.query.filter_by(author = user)\
+            .order_by(Post.date_posted.desc())\
+            .paginate(page = page, per_page = 5)
+    return render_template("user_post.html", posts=posts, user=user)
